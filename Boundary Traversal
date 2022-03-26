@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+
+public class Solution {
+    public static Boolean isLeaf(TreeNode root){
+        return (root.left == null) && (root.right == null);
+           
+    }
+     public static void leftTree(TreeNode root, ArrayList <Integer>res){
+        TreeNode curr = root;
+        while(curr != null){
+            if(isLeaf(curr) == false) res.add(curr.data);
+            if(curr.left != null) {curr = curr.left;}
+            else {curr = curr.right;}
+        }
+    }
+    
+     public static void rightTree(TreeNode root, ArrayList <Integer>res){
+        ArrayList <Integer> arr = new ArrayList<>(); 
+        TreeNode curr = root;
+        while(curr!= null){
+            if(isLeaf(curr) == false) arr.add(curr.data);
+            if(curr.right != null){curr = curr.right;}
+            else {curr = curr.left;}
+        }
+        for(int i = arr.size()-1; i>=0;i--){
+            res.add(arr.get(i));
+        }
+    }
+    
+     public static void leafNodes(TreeNode root, ArrayList<Integer> res) {
+        if (isLeaf(root)) {
+            res.add(root.data);
+            return;
+        }
+        if (root.left != null) leafNodes(root.left, res);
+        if (root.right != null) leafNodes(root.right, res);
+    }
+    
+	public static ArrayList<Integer> traverseBoundary(TreeNode root) {
+        ArrayList <Integer>res = new ArrayList<Integer>();
+		if (isLeaf(root) == false) res.add(root.data);
+        leftTree( root.left,res );
+        leafNodes( root,res);
+        rightTree( root.right, res);
+        return res;
+    }
+	
+}
