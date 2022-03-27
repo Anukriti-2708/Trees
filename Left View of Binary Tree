@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static ArrayList<Integer> getLeftView(TreeNode<Integer> root) 
+    {
+       ArrayList<Integer> list = new ArrayList<Integer>();
+       LeftView(list, root, 0);
+        return list;
+    }
+    
+    public static void LeftView( ArrayList<Integer> list, TreeNode <Integer>root, int depth){
+        TreeNode <Integer> curr = root;
+        if(curr == null){
+            return;
+        }
+        if(depth == list.size()){
+            list.add(curr.data);
+        }
+        LeftView (list, curr.left, depth+1);
+        LeftView(list, curr.right, depth+1);
+    }
+}
