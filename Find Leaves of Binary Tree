@@ -1,0 +1,24 @@
+class Solution {
+    
+    public List<List<Integer>> findLeaves(TreeNode root) {
+        
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(root == null ){ 
+            return result;
+        }
+        int level = removeLeaves(root,result);
+        return result;
+    }
+    
+    public Integer removeLeaves(TreeNode root, List<List<Integer>> result ){
+        if(root == null)
+            return -1;
+        List<Integer> l = new ArrayList<Integer>();
+       int level = Math.max(removeLeaves(root.left, result), removeLeaves(root.right, result))+1;
+        if(level>=result.size()){
+            result.add(new ArrayList<Integer>());
+        }
+        result.get(level).add(root.val);
+        return level;
+        }
+}
