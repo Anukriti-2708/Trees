@@ -1,0 +1,24 @@
+class BSTIterator {
+      Queue <Integer> q;
+    
+    public BSTIterator(TreeNode root) {
+        q = new LinkedList<Integer>();
+        Inorder(root);
+        
+    }
+    
+    public void Inorder(TreeNode root){
+        if(root == null)return;
+        Inorder(root.left);
+        q.add(root.val);
+        Inorder(root.right);
+    }
+    
+    public int next() {
+       return q.remove();
+    }
+    
+    public boolean hasNext() {
+        return !q.isEmpty();
+    }
+}
